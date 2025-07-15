@@ -253,10 +253,10 @@ def get_expert_recommendation(log_id):
             expert_response_update = exec_request({"log_id": log_id}, qna_url)
             expert_msg = msg_entry(id=str(uuid.uuid4()), role='assistant', \
                 text=str(sample_recommendation) + " Please contact below expert for more details." 
-                + "\n \n **Name**: "+ expert_response_update.json()['recommended_experts'][0]["name"]
-                + ",\n \n **Email**: " + expert_response_update.json()['recommended_experts'][0]["email"]
-                + ",\n \n **Designation**: " + expert_response_update.json()['recommended_experts'][0]["position"]
-                + ",\n \n **Industry**: " + expert_response_update.json()['recommended_experts'][0]["domain"]
+                + "\n \n **Name**: "+ expert_response_update.json()['recommended_top_experts'][0]["name"]
+                + ",\n \n **Email**: " + expert_response_update.json()['recommended_top_experts'][0]["email"]
+                + ",\n \n **Designation**: " + expert_response_update.json()['recommended_top_experts'][0]["position"]
+                + ",\n \n **Industry**: " + expert_response_update.json()['recommended_top_experts'][0]["domain"]
                 + ".\n \n Please type your next question in below input box!" if expert_response_update.status_code == 200 and 'expert_details' in expert_response_update.json()['expert_status'] else "No Experts found on this topic, Please ask next Question!")
    
         # text='Please contact expert '+response_update.json()['predictions'][0]['values'][0][0][0]["name"] + ' , Email id: '+ response_update.json()['predictions'][0]['values'][0][0][0]["email"] + 'Profile Info: '+ response_update.json()['predictions'][0]['values'][0][0][0]["text"] if response_update.status_code == 200 and response_update.json()['predictions'][0]['values'][0][1] == 'expert_details retrieved from log records' else 'No Experts found on this topic')
